@@ -1,0 +1,54 @@
+{
+  "version": 1,
+  "note": "The Wing and ABA templates were written from real alerts (Oct 2026). Wing: transfers out and in, in US dollars, English only. ABA: one transfer out and one in, in US dollars; the out alert's title name could be either side, so no counterparty is read for it. The generic English templates are still guesses (VERIFY). Add per-app templates with \"packages\" once the wording of that app is confirmed. Khmer wording and riel amounts are not covered yet.",
+  "templates": [
+    {
+      "id": "aba-in",
+      "packages": ["com.paygo24.ibank"],
+      "incoming": true,
+      "pattern": "(?im)^Received from (?<party>[^\\n]{1,60})\\n(?<amount>\\d[\\d,]*(?:\\.\\d+)?)\\s?(?<currency>USD|KHR|\\$|៛)\\s+is received to account\\s+(?<account>[\\d ]{4,30})"
+    },
+    {
+      "id": "aba-out",
+      "packages": ["com.paygo24.ibank"],
+      "incoming": false,
+      "pattern": "(?i)\\b(?<amount>\\d[\\d,]*(?:\\.\\d+)?)\\s?(?<currency>USD|KHR|\\$|៛)\\s+is paid from account\\s+(?<account>[\\d ]{4,30})"
+    },
+    {
+      "id": "wing-out",
+      "packages": ["com.wingmoney.wingpay"],
+      "incoming": false,
+      "pattern": "(?m)^Transferred to (?<party>[^\\n]{1,60})\\nAmount:\\s*-\\s*(?<currency>\\$|៛|USD|KHR)\\s?(?<amount>\\d[\\d,]*(?:\\.\\d+)?)(?:\\nFrom Account:\\s*(?<account>[\\d ]{4,30}))?"
+    },
+    {
+      "id": "wing-in",
+      "packages": ["com.wingmoney.wingpay"],
+      "incoming": true,
+      "pattern": "(?m)^Received from (?<party>[^\\n]{1,60})\\nAmount:\\s*(?<currency>\\$|៛|USD|KHR)\\s?(?<amount>\\d[\\d,]*(?:\\.\\d+)?)(?:\\nTo Account:\\s*(?<account>[\\d ]{4,30}))?"
+    },
+    {
+      "id": "generic-out-currency-first",
+      "packages": [],
+      "incoming": false,
+      "pattern": "(?i)\\b(?:you (?:have )?(?:paid|sent|transferred)|payment of|purchase of|debited|paid|sent|transferred)\\D{0,20}?(?<currency>USD|KHR|\\$|៛|riels?)\\s?(?<amount>\\d[\\d,]*(?:\\.\\d+)?)(?:\\s*(?:to|at)\\s+(?<party>[^.,\\n]{1,40}))?"
+    },
+    {
+      "id": "generic-out-amount-first",
+      "packages": [],
+      "incoming": false,
+      "pattern": "(?i)\\b(?:you (?:have )?(?:paid|sent|transferred)|payment of|purchase of|debited|paid|sent|transferred)\\s+(?<amount>\\d[\\d,]*(?:\\.\\d+)?)\\s?(?<currency>USD|KHR|\\$|៛|riels?)(?:\\s*(?:to|at)\\s+(?<party>[^.,\\n]{1,40}))?"
+    },
+    {
+      "id": "generic-in-currency-first",
+      "packages": [],
+      "incoming": true,
+      "pattern": "(?i)\\b(?:you (?:have )?received|received|credited|deposit(?:ed)? of)\\D{0,20}?(?<currency>USD|KHR|\\$|៛|riels?)\\s?(?<amount>\\d[\\d,]*(?:\\.\\d+)?)(?:\\s*from\\s+(?<party>[^.,\\n]{1,40}))?"
+    },
+    {
+      "id": "generic-in-amount-first",
+      "packages": [],
+      "incoming": true,
+      "pattern": "(?i)\\b(?:you (?:have )?received|received|credited|deposit(?:ed)? of)\\s+(?<amount>\\d[\\d,]*(?:\\.\\d+)?)\\s?(?<currency>USD|KHR|\\$|៛|riels?)(?:\\s*from\\s+(?<party>[^.,\\n]{1,40}))?"
+    }
+  ]
+}
