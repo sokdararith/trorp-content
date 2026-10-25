@@ -1,6 +1,6 @@
 {
-  "version": 2,
-  "note": "[OTA test, v2] The Wing and ABA templates were written from real alerts (Oct 2026). Wing: transfers out and in, in US dollars, English only. ABA: one transfer out and one in, in US dollars; the out alert's title name could be either side, so no counterparty is read for it. The generic English templates are still guesses (VERIFY). Add per-app templates with \"packages\" once the wording of that app is confirmed. Khmer wording and riel amounts are not covered yet.",
+  "version": 3,
+  "note": "The Wing and ABA templates were written from real alerts (Oct 2026). Wing: transfers out and in, in US dollars, English only. ABA: one transfer out and one in, in US dollars; the out alert's title name could be either side, so no counterparty is read for it. The generic English templates are still guesses (VERIFY). Add per-app templates with \"packages\" once the wording of that app is confirmed. Khmer wording and riel amounts are not covered yet.",
   "templates": [
     {
       "id": "aba-in",
